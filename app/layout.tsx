@@ -28,13 +28,13 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className="dark">
+    <html lang="sk">
       <head>
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
       </head>
-      <body className="bg-zinc-950 text-white min-h-screen">
+      <body className="min-h-screen" style={{ background: 'var(--bg)', color: 'var(--text)' }}>
         <Providers>
           <ServiceWorkerRegistrar />
           <main className="pb-20 min-h-screen">

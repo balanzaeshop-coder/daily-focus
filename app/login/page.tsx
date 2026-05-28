@@ -9,25 +9,25 @@ function LoginContent() {
   const error = searchParams.get('error')
 
   return (
-    <div className="min-h-screen bg-zinc-950 flex items-center justify-center px-4">
+    <div className="min-h-screen flex items-center justify-center px-4" style={{ background: 'var(--bg)' }}>
       <div className="max-w-sm w-full">
         <div className="text-center mb-10">
-          <div className="w-16 h-16 bg-zinc-900 border border-zinc-800 rounded-2xl flex items-center justify-center mx-auto mb-4">
-            <span className="text-2xl">🎯</span>
-          </div>
-          <h1 className="text-2xl font-bold text-white">Daily Focus</h1>
-          <p className="text-zinc-500 text-sm mt-2">3 priority. Každý deň. Bez výhovoriek.</p>
+          <h1 className="text-4xl font-bold italic mb-2" style={{ fontFamily: "'Cormorant Garant', serif", color: 'var(--text)' }}>
+            Daily Focus
+          </h1>
+          <p className="text-sm" style={{ color: 'var(--text-muted)' }}>3 priority. Každý deň. Bez výhovoriek.</p>
         </div>
 
         {error && (
-          <div className="mb-5 p-3.5 rounded-xl bg-red-500/10 border border-red-500/30 text-red-400 text-sm text-center">
+          <div className="mb-5 p-3.5 rounded-xl border text-sm text-center" style={{ background: '#FEF2F2', borderColor: '#FECACA', color: '#DC2626' }}>
             Prístup zamietnutý — iba tvoj Google účet má prístup.
           </div>
         )}
 
         <button
           onClick={() => signIn('google', { callbackUrl: '/' })}
-          className="w-full flex items-center justify-center gap-3 bg-white text-zinc-900 rounded-xl py-3.5 px-4 font-semibold text-sm hover:bg-zinc-100 active:bg-zinc-200 transition-colors"
+          className="w-full flex items-center justify-center gap-3 rounded-xl py-3.5 px-4 font-semibold text-sm transition-all border"
+          style={{ background: 'var(--card)', borderColor: 'var(--border)', color: 'var(--text)' }}
         >
           <svg viewBox="0 0 24 24" className="w-5 h-5 flex-shrink-0">
             <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
@@ -38,7 +38,7 @@ function LoginContent() {
           Prihlásiť sa cez Google
         </button>
 
-        <p className="text-center text-xs text-zinc-700 mt-6">
+        <p className="text-center text-xs mt-6" style={{ color: 'var(--text-subtle)' }}>
           Prístup iba pre autorizovaný účet
         </p>
       </div>

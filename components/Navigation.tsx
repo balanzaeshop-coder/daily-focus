@@ -28,9 +28,10 @@ const tabs = [
 
 export default function Navigation() {
   const pathname = usePathname()
+  if (pathname === '/login') return null
 
   return (
-    <nav className="fixed bottom-0 left-0 right-0 z-50 bg-zinc-900/95 backdrop-blur border-t border-zinc-800" style={{ paddingBottom: 'env(safe-area-inset-bottom)' }}>
+    <nav className="fixed bottom-0 left-0 right-0 z-50 border-t" style={{ background: 'rgba(255,255,255,0.95)', backdropFilter: 'blur(12px)', borderColor: 'var(--border)', paddingBottom: 'env(safe-area-inset-bottom)' }}>
       <div className="flex">
         {tabs.map(tab => {
           const active = pathname === tab.href
@@ -38,7 +39,8 @@ export default function Navigation() {
             <Link
               key={tab.href}
               href={tab.href}
-              className={`flex-1 flex flex-col items-center gap-1 py-3 transition-colors ${active ? 'text-white' : 'text-zinc-500 hover:text-zinc-300'}`}
+              className="flex-1 flex flex-col items-center gap-1 py-3 transition-colors"
+              style={{ color: active ? 'var(--text)' : 'var(--text-subtle)' }}
             >
               {tab.icon(active)}
               <span className="text-[10px] font-medium tracking-wide">{tab.label}</span>

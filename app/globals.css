@@ -2,10 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garant:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@400;500;600&display=swap');
 
 :root {
-  color-scheme: dark;
+  --bg: #EEECF5;
+  --card: #FFFFFF;
+  --border: #E4E0F0;
+  --border-subtle: #EDE9F8;
+  --text: #1C1B23;
+  --text-muted: #6B6880;
+  --text-subtle: #A09CB8;
 }
 
 * {
@@ -13,22 +19,24 @@
 }
 
 html {
-  background-color: #09090b;
+  background-color: var(--bg);
 }
 
 body {
-  background-color: #09090b;
-  color: #fafafa;
+  background-color: var(--bg);
+  color: var(--text);
   font-family: 'Inter', system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
 }
 
-/* iOS safe area support */
+h1, h2, h3 {
+  font-family: 'Cormorant Garant', Georgia, serif;
+}
+
 .safe-bottom {
   padding-bottom: max(1rem, env(safe-area-inset-bottom));
 }
 
-/* Smooth animations */
 @keyframes slide-up {
   from { transform: translateY(8px); opacity: 0; }
   to { transform: translateY(0); opacity: 1; }
@@ -38,14 +46,6 @@ body {
   animation: slide-up 0.2s ease-out;
 }
 
-/* Custom scrollbar */
-::-webkit-scrollbar {
-  width: 4px;
-}
-::-webkit-scrollbar-track {
-  background: transparent;
-}
-::-webkit-scrollbar-thumb {
-  background: #3f3f46;
-  border-radius: 2px;
-}
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }

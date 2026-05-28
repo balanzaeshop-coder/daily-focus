@@ -55,20 +55,21 @@ export default function Dashboard() {
   if (!store.hydrated) {
     return (
       <div className="flex items-center justify-center min-h-screen">
-        <div className="w-6 h-6 border-2 border-zinc-700 border-t-white rounded-full animate-spin" />
+        <div className="w-6 h-6 rounded-full animate-spin border-2" style={{ borderColor: 'var(--border)', borderTopColor: 'var(--text)' }} />
       </div>
     )
   }
 
   return (
     <div className="max-w-lg mx-auto px-4 pt-10 pb-6">
-      {/* Hlavička */}
       <div className="mb-8">
-        <p className="text-xs font-medium text-zinc-500 uppercase tracking-widest mb-1">
+        <p className="text-xs font-medium uppercase tracking-widest mb-1" style={{ color: 'var(--text-subtle)' }}>
           {formatDatum(new Date().toISOString())}
         </p>
-        <h1 className="text-2xl font-bold text-white">Daily Focus</h1>
-        <p className="text-sm text-zinc-500 mt-1">
+        <h1 className="text-3xl font-bold" style={{ fontFamily: "'Cormorant Garant', serif", color: 'var(--text)' }}>
+          Daily Focus
+        </h1>
+        <p className="text-sm mt-1" style={{ color: 'var(--text-muted)' }}>
           {store.todayTasks.length === 0
             ? 'Aké sú tvoje 3 priority na dnes?'
             : allDone
@@ -77,23 +78,21 @@ export default function Dashboard() {
         </p>
       </div>
 
-      {/* Rýchle zachytenie */}
       <div className="mb-8">
         <QuickCapture onCapture={store.capture} />
         {store.backlogTasks.length > 0 && (
-          <p className="text-xs text-zinc-600 mt-2 pl-1">
+          <p className="text-xs mt-2 pl-1" style={{ color: 'var(--text-subtle)' }}>
             {pocetPoloziek(store.backlogTasks.length)} v zásobníku
           </p>
         )}
       </div>
 
-      {/* Dnešné priority */}
       <div className="mb-4">
         <div className="flex items-center justify-between mb-4">
-          <h2 className="text-xs font-semibold text-zinc-400 uppercase tracking-widest">
+          <h2 className="text-xs font-semibold uppercase tracking-widest" style={{ color: 'var(--text-muted)' }}>
             Dnešný fokus
           </h2>
-          <span className="text-xs text-zinc-600 font-medium">
+          <span className="text-xs font-medium" style={{ color: 'var(--text-subtle)' }}>
             {store.todayTasks.length}/3
           </span>
         </div>
@@ -111,18 +110,17 @@ export default function Dashboard() {
             </div>
           ))}
 
-          {/* Upozornenie */}
           {warningVisible && (
-            <div className="rounded-xl bg-amber-500/10 border border-amber-500/30 px-4 py-3 text-sm text-amber-400 animate-slide-up">
+            <div className="rounded-xl border px-4 py-3 text-sm animate-slide-up" style={{ background: '#FFF9EB', borderColor: '#F6D860', color: '#92600A' }}>
               Fokus. Len 3 priority denne. Presuň niečo do zásobníka.
             </div>
           )}
 
-          {/* Tlačidlo na pridanie priority / formulár */}
           {canAddMore && !addingTask && (
             <button
               onClick={() => setAddingTask(true)}
-              className="w-full rounded-2xl border border-dashed border-zinc-800 hover:border-zinc-700 py-5 text-sm text-zinc-600 hover:text-zinc-400 transition-all flex items-center justify-center gap-2"
+              className="w-full rounded-2xl border border-dashed py-5 text-sm transition-all flex items-center justify-center gap-2"
+              style={{ borderColor: 'var(--border)', color: 'var(--text-subtle)' }}
             >
               <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
@@ -132,7 +130,7 @@ export default function Dashboard() {
           )}
 
           {addingTask && (
-            <div className="rounded-2xl border border-zinc-700 bg-zinc-900/80 p-4 space-y-3 animate-slide-up">
+            <div className="rounded-2xl border p-4 space-y-3 animate-slide-up" style={{ background: 'var(--card)', borderColor: 'var(--border)' }}>
               <input
                 autoFocus
                 type="text"
@@ -143,20 +141,23 @@ export default function Dashboard() {
                   if (e.key === 'Escape') handleCancelAdd()
                 }}
                 placeholder="Čo treba urobiť?"
-                className="w-full bg-transparent text-white placeholder-zinc-600 text-sm outline-none"
+                className="w-full bg-transparent text-sm outline-none"
+                style={{ color: 'var(--text)' }}
               />
               <CategoryPicker value={newCategory} onChange={setNewCategory} />
               <div className="flex gap-2 pt-1">
                 <button
                   onClick={handleAddTask}
                   disabled={!newTitle.trim() || !newCategory}
-                  className="flex-1 py-2 rounded-xl text-sm font-medium bg-white text-zinc-950 disabled:opacity-30 disabled:cursor-not-allowed transition-opacity"
+                  className="flex-1 py-2 rounded-xl text-sm font-medium disabled:opacity-30 disabled:cursor-not-allowed transition-opacity text-white"
+                  style={{ background: 'var(--text)' }}
                 >
                   Pridať
                 </button>
                 <button
                   onClick={handleCancelAdd}
-                  className="px-4 py-2 rounded-xl text-sm font-medium text-zinc-500 hover:text-white transition-colors"
+                  className="px-4 py-2 rounded-xl text-sm font-medium transition-colors"
+                  style={{ color: 'var(--text-muted)' }}
                 >
                   Zrušiť
                 </button>
@@ -165,10 +166,10 @@ export default function Dashboard() {
           )}
 
           {!canAddMore && !addingTask && (
-            <div className="rounded-2xl bg-zinc-900/50 border border-zinc-800/50 px-4 py-3 flex items-center gap-3">
+            <div className="rounded-2xl border px-4 py-3 flex items-center gap-3" style={{ background: 'rgba(255,255,255,0.6)', borderColor: 'var(--border)' }}>
               <span className="text-lg">🎯</span>
-              <p className="text-xs text-zinc-500 leading-relaxed">
-                Máš svoje 3 priority. <strong className="text-zinc-400">Zostaň sústredený.</strong><br />
+              <p className="text-xs leading-relaxed" style={{ color: 'var(--text-muted)' }}>
+                Máš svoje 3 priority. <strong style={{ color: 'var(--text)' }}>Zostaň sústredený.</strong><br />
                 Nové nápady idú do zásobníka.
               </p>
             </div>
@@ -176,16 +177,15 @@ export default function Dashboard() {
         </div>
       </div>
 
-      {/* Legenda kategórií */}
       {store.todayTasks.length > 0 && (
-        <div className="mt-8 pt-6 border-t border-zinc-900">
+        <div className="mt-8 pt-6 border-t" style={{ borderColor: 'var(--border)' }}>
           <div className="flex gap-4 justify-center">
             {(['revenue', 'growth', 'ops'] as Category[]).map(cat => {
               const meta = CATEGORY_META[cat]
               const count = store.todayTasks.filter(t => t.category === cat).length
               if (count === 0) return null
               return (
-                <div key={cat} className="flex items-center gap-1.5 text-xs text-zinc-600">
+                <div key={cat} className="flex items-center gap-1.5 text-xs" style={{ color: 'var(--text-subtle)' }}>
                   <span className={`w-2 h-2 rounded-full ${meta.dotColor}`} />
                   <span>{count}× {meta.label}</span>
                 </div>

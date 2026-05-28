@@ -24,8 +24,9 @@ export default function CategoryPicker({ value, onChange, size = 'md' }: Props) 
             className={`${pad} rounded-lg border font-medium transition-all flex items-center gap-1.5 ${
               selected
                 ? `${meta.bg} ${meta.border} ${meta.color}`
-                : 'bg-zinc-900 border-zinc-800 text-zinc-500 hover:text-zinc-300 hover:border-zinc-700'
+                : 'border text-sm'
             }`}
+            style={!selected ? { background: 'var(--bg)', borderColor: 'var(--border)', color: 'var(--text-muted)' } : {}}
           >
             <span>{meta.emoji}</span>
             <span>{meta.label}</span>
