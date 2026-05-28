@@ -128,6 +128,8 @@ export default function VideoPage() {
       const { pipeline, env } = await import('@xenova/transformers')
       // @ts-ignore
       env.allowLocalModels = false
+      // @ts-ignore
+      env.backends.onnx.wasm.numThreads = 1 // vypne SharedArrayBuffer (potrebný pre Safari)
 
       const transcriber = await pipeline('automatic-speech-recognition', 'Xenova/whisper-base', {
         // @ts-ignore
