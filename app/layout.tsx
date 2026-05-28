@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next'
 import './globals.css'
 import Navigation from '@/components/Navigation'
 import ServiceWorkerRegistrar from './ServiceWorkerRegistrar'
+import { Providers } from './providers'
 
 export const metadata: Metadata = {
   title: 'Daily Focus',
@@ -34,11 +35,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
       </head>
       <body className="bg-zinc-950 text-white min-h-screen">
-        <ServiceWorkerRegistrar />
-        <main className="pb-20 min-h-screen">
-          {children}
-        </main>
-        <Navigation />
+        <Providers>
+          <ServiceWorkerRegistrar />
+          <main className="pb-20 min-h-screen">
+            {children}
+          </main>
+          <Navigation />
+        </Providers>
       </body>
     </html>
   )
