@@ -9,8 +9,6 @@
     "prepare": "node scripts/generate-icons.js"
   },
   "dependencies": {
-    "@ffmpeg/ffmpeg": "^0.11.6",
-    "@xenova/transformers": "^2.17.2",
     "next": "14.2.3",
     "next-auth": "^4.24.14",
     "react": "^18",
@@ -21,7 +19,6 @@
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "autoprefixer": "^10.0.1",
-    "null-loader": "^4.0.1",
     "postcss": "^8",
     "tailwindcss": "^3.4.0",
     "typescript": "^5"
