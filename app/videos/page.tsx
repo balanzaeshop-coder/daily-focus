@@ -125,11 +125,17 @@ export default function VideoPage() {
 
       // 2. Načítam Whisper model
       setProgress('Načítavam Whisper AI model... (prvé spustenie ~2 min)')
+
+      // Safari nemá SharedArrayBuffer bez COOP/COEP hlavičiek — polyfill pre single-thread mode
+      if (typeof SharedArrayBuffer === 'undefined') {
+        ;(globalThis as any).SharedArrayBuffer = ArrayBuffer
+      }
+
       const { pipeline, env } = await import('@xenova/transformers')
       // @ts-ignore
       env.allowLocalModels = false
       // @ts-ignore
-      env.backends.onnx.wasm.numThreads = 1 // vypne SharedArrayBuffer (potrebný pre Safari)
+      env.backends.onnx.wasm.numThreads = 1
 
       const transcriber = await pipeline('automatic-speech-recognition', 'Xenova/whisper-base', {
         // @ts-ignore
